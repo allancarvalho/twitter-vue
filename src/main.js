@@ -1,10 +1,9 @@
 import Vue from 'vue';
-import Main from './components/main.vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex);
+import Main from './components/main.vue';
+import store from './store';
 
 new Vue({
     el: '#app',
-    render: h => h(Main)
+    store,
+    render: (h) => h(Main),
 });

@@ -2,7 +2,7 @@
     export default {
         name: 'app',
         data: () => ({
-            message: 'Welcome'
+            message: 'Welcome 123'
         })
     }
 </script>
