@@ -1,18 +1,16 @@
 <script>
   import { mapState, mapActions, mapGetters } from 'vuex'
   import router from '../routes';
-  import store from '../store';
   export default {
     created() {
       this.fetchData();
     },
     methods: {
       navigate() {
-        router.push({ path: '/produto/121923346?a=1' })
+        router.push({ path: '/produto/121923346' })
       },
       fetchData() {
-        // dispatch('moduleA:increment')
-        store.dispatch('getProduct');
+        this.$store.dispatch('getProduct');
       }
     },
     watch: {
@@ -25,8 +23,9 @@
   }
 </script>
 <template>
-  <div>
-    <h1>{{this.product.name}} ()</h1>
+  <div v-if="hasProduct">
+    <h1>{{product.name}} ()</h1>
+    <img v-for="image in product.images" :src="image.large"/>
     <button @click="navigate">Navegar</button>
   </div>
 </template>
