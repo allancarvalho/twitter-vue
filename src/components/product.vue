@@ -1,32 +1,22 @@
 <script>
-  import { mapState, mapActions, mapGetters } from 'vuex'
-  import router from '../routes';
-  import store from '../store';
+  import { mapState, mapActions } from 'vuex'
+
   export default {
-    created() {
-      this.fetchData();
+    beforeMount() {
+      this.$store.dispatch('getProduct');
     },
-    methods: {
-      navigate() {
-        router.push({ path: '/produto/121923346?a=1' })
+    computed: {
+      product() {
+        return this.$store.state.product;
       },
-      fetchData() {
-        // dispatch('moduleA:increment')
-        store.dispatch('getProduct');
+      hasProduct() {
+        return this.$store.state.product && !this.$store.state.product.loading
       }
-    },
-    watch: {
-      '$route': 'fetchData'
-    },
-    computed: mapGetters([
-      'product',
-      'hasProduct'
-    ])
+    }
   }
 </script>
 <template>
-  <div>
-    <h1>{{this.product.name}} ()</h1>
-    <button @click="navigate">Navegar</button>
+  <div v-if="hasProduct">
+    <h1>Product Id : {{product.name}}</h1>
   </div>
 </template>
